@@ -1,19 +1,20 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
+from .views import *
 
 
-from . import views
+app_name = 'api'
+
 
 urlpatterns = [
-    url(r'^$', views.api_root),
-    # # registration form for youngling
-    # url(r'^youngling.html/$', views.youngling, name='youngling'),
-    # # before answering
-    # url(r'^genering.html/(?P<young_id>[0-9]+)/$', views.before_testing, name='before'),
-    # # younglings answering
-    # url(r'^answering.html/(?P<personal_test_id>[0-9]+)/$', views.testing, name='testing'),
-    # # jedies list
-    # url(r'^jedies.html/$', views.jedies, name='jedies'),
-    # # candidates list
-    # url(r'j_y_choosing.html/(?P<selected_jedi_id>[0-9]+)/$', views.j_y_choosing, name='j_y_choosing'),
+    url(r'^$', api_root),
+    url(r'^orders/$', OrderList.as_view(), name='order-list'),
+    # url(r'^orders/?P<customer>\d+/$', OrderList.as_view(), )
+    url(r'^orders/?P<pk>\d+/$', OrderDetail.as_view(), name='order-detail'),
+    url(r'^pizzas/$', PizzaList.as_view(), name='pizza-list'),
+    url(r'^pizzas/?P<pk>\d+/$', PizzaDetail.as_view(), name='pizza-detail'),
 ]
+
+
+# Format suffixes
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
