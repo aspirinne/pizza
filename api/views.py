@@ -8,6 +8,15 @@ from .models import Order, Pizza
 
 
 # Create your views here.
+@api_view(['GET'])
+def api_root(request, format=None):
+    """The entry endpoint of API"""
+    return Response({
+        'orders'
+    })
+
+
 class OrderList(generics.ListCreateAPIView):
+    """API endpoint that represents a list of Orders."""
     model = Order
     serializer_class = OrderSerializer

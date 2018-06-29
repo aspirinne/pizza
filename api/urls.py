@@ -1,12 +1,11 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 
 from . import views
 
 urlpatterns = [
-    # start page with choice
-    url(r'^$', ''),
+    url(r'^$', views.api_root),
     # # registration form for youngling
     # url(r'^youngling.html/$', views.youngling, name='youngling'),
     # # before answering
