@@ -25,11 +25,12 @@ class TestOrderDetail:
         yield
 
     def test_get(self):
-        response = self.client.get('orders/')
+        response = self.client.get('/orders/')
         if Order.objects.all().exists():
             assert response.status_code == HTTP_200_OK
         else:
             assert response.status_code == HTTP_404_NOT_FOUND
 
-    def test_create(self):
-        pass
+    def test_create(self, order_data):
+        response = self.client.post('/orders/', order_data)
+        assert response.status_code == HTTP_201_CREATED
